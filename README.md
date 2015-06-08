@@ -2,7 +2,7 @@ AHN pointcloud viewer web service
 =================================
 
 [![Build Status](https://travis-ci.org/NLeSC/ahn-pointcloud-viewer-ws.svg)](https://travis-ci.org/NLeSC/ahn-pointcloud-viewer-ws)
-[![Coverage Status](https://coveralls.io/repos/NLeSC/ahn-pointcloud-viewer-ws/badge.svg?branch=server)](https://coveralls.io/r/NLeSC/ahn-pointcloud-viewer-ws?branch=master)
+[![Coverage Status](https://coveralls.io/repos/NLeSC/ahn-pointcloud-viewer-ws/badge.svg?branch=master)](https://coveralls.io/r/NLeSC/ahn-pointcloud-viewer-ws?branch=master)
 
 Uses a PostGIS database to approximate number of points in selected area 
 and starts a script to create a laz file of the selection.
