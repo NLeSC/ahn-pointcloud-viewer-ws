@@ -1,16 +1,14 @@
 language: java
 jdk:
   - oraclejdk8
-python:
-  - "2.7"
 env:
   - TERM=dumb
 install:
-  - cd ahn-pointcloud-viewer-ws && ./gradlew assemble
+  - ./gradlew assemble
 script:
-  - cd ../ahn-pointcloud-viewer-ws && ./gradlew check
+  - ./gradlew check
 after_success:
-  - cd ../ahn-pointcloud-viewer-ws && ./gradlew jacocoTestReport coveralls
+  - ./gradlew jacocoTestReport coveralls
 cache:
   directories:
     - $HOME/.gradle
