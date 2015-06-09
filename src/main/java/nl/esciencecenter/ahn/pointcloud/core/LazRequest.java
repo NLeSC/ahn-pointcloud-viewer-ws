@@ -11,7 +11,7 @@ public class LazRequest extends Selection {
     @NotNull
     @Range(min=0, max=24)
     @JsonProperty
-    private int level;
+    private Integer level;
 
     @NotNull
     @Email
@@ -21,7 +21,7 @@ public class LazRequest extends Selection {
     private LazRequest() {
     }
 
-    public LazRequest(Double left, Double bottom, Double right, Double top, String email, int level) {
+    public LazRequest(Double left, Double bottom, Double right, Double top, String email, Integer level) {
         super(left, bottom, right, top);
         this.email = email;
         this.level = level;
