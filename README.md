@@ -29,6 +29,21 @@ To open in an IDE like Eclipse or Intellij IDEA, create project files with `./gr
 ### Manual testing
 
 1. Create a database.
+
+1.1 Start db
+
+````
+docker run -e POSTGRES_USER=ahn -e POSTGRES_PASSWORD=mysecret -p 5432:5432 -d mdillon/postgis
+````
+
+1.2 Fill it
+
+````
+psql -h localhost -U ahn ahn
+````
+
+See `src/main/java/nl/esciencecenter/ahn/pointcloud/db/PointCloudStore.java` for example dataset.
+
 2. Create a executable to run to create laz files. For example:
 
 ````
