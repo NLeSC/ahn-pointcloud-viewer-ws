@@ -33,25 +33,19 @@ The AHN uses the Amersfoort / RD New projection (EPSG:28992).
 + Response 200 (application/json)
 
     + Attributes (object)
-        + points: 10193813 (number) - Approximate number of points in selection
+        + rawPoints: 10193813 (number) - Approximate number of points in selection
+        + returnedPoints: 9234324 (number) - Approximate number of points in selection which will be returned.
         + level: 8 (number) - Level in octree pyramid to fetch points from. Lower number means less points.
-        + coverage: 100 (number) - Percentage of points returned with given level.
+        + coverage: 0.9058 (number) - Ratio of points returned with given level.
 
     + Body
 
             {
-                "points": 10193813,
+                "rawPoints": 10193813,
+                "returnedPoints": 9234324,
                 "level": 8,
-                "coverage": 100
-            }
-            
-+ Response 413 (text/html)
-
-    When selection is too large.
-
-    + Body
-
-            Request Entity Too Large            
+                "coverage": 0.9058
+            }      
 
 ## Prepare laz file of selection [/laz]
 
@@ -67,7 +61,6 @@ Background job will be started to create laz file of selection and send e-mail w
         + right: 126241.760 (number) - Most right or maximum x coordinate.
         + top: 485730.400 (number) - Most top or maximum y coordinate.
         + email: someone@example.com (string) - E-mail to send laz file url to.
-        + level: 8 (number) - Level in octree pyramid to fetch points from. Lower number means less points.
     
     + Body
     
@@ -76,32 +69,23 @@ Background job will be started to create laz file of selection and send e-mail w
                 "bottom": 484567.840,
                 "right": 126241.760,
                 "top": 485730.400,
-                "email": "someone@example.com",
-                "level": 8
+                "email": "someone@example.com"
             }
-
 
 + Response 200 (application/json)
 
     + Attributes (object)
-        + points: 10193813 (number) - Approximate number of points in selection
+        + rawPoints: 10193813 (number) - Approximate number of points in selection
+        + returnedPoints: 9234324 (number) - Approximate number of points in selection which will be returned.
         + level: 8 (number) - Level in octree pyramid to fetch points from. Lower number means less points.
-        + coverage: 100 (number) - Percentage of points returned with given level.
+        + coverage: 0.9058 (number) - Ratio of points returned with given level.
 
     + Body
 
             {
-                "points": 10193813,
+                "rawPoints": 10193813,
+                "returnedPoints": 9234324,
                 "level": 8,
-                "coverage": 100
-            }
-
-
-+ Response 413 (text/html)
- 
-    When selection is too large.
-
-    + Body
-
-            Request Entity Too Large
+                "coverage": 0.9058
+            }   
 

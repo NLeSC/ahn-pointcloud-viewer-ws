@@ -23,7 +23,7 @@ public class SizeResourceTest {
     @Test
     public void testGetSizeOfSelection() throws TooManyPoints {
         Selection selection = new Selection(124931.360, 484567.840, 126241.760, 485730.400);
-        Size expected = new Size(100L, 8, 100.0);
+        Size expected = new Size(10193813L, 9234324L, 8);
         when(store.getApproximateNumberOfPoints(selection)).thenReturn(expected);
         SizeResource resource = new SizeResource(store);
 

@@ -30,44 +30,44 @@ public class LazRequestTest  {
 
     @Test
     public void testGetEmail() throws Exception {
-        LazRequest request = new LazRequest(1.0, 2.0, 3.0, 4.0, "someone@example.com", 10);
+        LazRequest request = new LazRequest(1.0, 2.0, 3.0, 4.0, "someone@example.com");
 
         assertThat(request.getEmail(), is("someone@example.com"));
     }
 
     @Test
-    public void testGetLevel() throws Exception {
-        LazRequest request = new LazRequest(1.0, 2.0, 3.0, 4.0, "someone@example.com", 10);
+    public void testToJobDescription() throws Exception {
+        LazRequest request = new LazRequest(1.0, 2.0, 3.0, 4.0, "someone@example.com");
+        ScriptConfiguration scriptConfig = new ScriptConfiguration(28992, "/bin/echo", "ahn2", "/data/jobs", "http://localhost/jobs");
 
-        assertThat(request.getLevel(), is(10));
-    }
+        JobDescription result = request.toJobDescription(8, scriptConfig);
 
-    @Test
-    public void testToJobArguments() throws Exception {
-        LazRequest request = new LazRequest(1.0, 2.0, 3.0, 4.0, "someone@example.com", 10);
-
-        String[] expected = {"1.0", "2.0", "3.0", "4.0", "someone@example.com", "10"};
-
-        assertThat(request.toJobArguments(), equalTo(expected));
+        JobDescription expected = new JobDescription();
+        expected.setExecutable("/bin/echo");
+        String[] expectedArguments = {
+            "-s", "28992", "-e", "someone@example.com", "-l", "8", "-b", "1.0,2.0,3.0,4.0", "-d", "ahn2", "-f", "/data/jobs", "-u", "http://localhost/jobs"
+        };
+        expected.setArguments(expectedArguments);
+        assertThat(result, equalTo(expected));
     }
 
     @Test
     public void deserializesFromJSON() throws Exception {
         final LazRequest result = MAPPER.readValue(fixture("fixtures/lazrequest.json"), LazRequest.class);
 
-        final LazRequest expected = new LazRequest(124931.360, 484567.840, 126241.760, 485730.400, "someone@example.com", 10);
+        final LazRequest expected = new LazRequest(124931.360, 484567.840, 126241.760, 485730.400, "someone@example.com");
         assertThat(result, equalTo(expected));
     }
 
     @Test
-    public void testValidation_levelmustbeset_invalid() {
-        LazRequest request = new LazRequest(1.0, 2.0, 3.0, 4.0, "someone@example.com", null);
+    public void testValidation_emailmustbefilled_invalid() {
+        LazRequest request = new LazRequest(1.0, 2.0, 3.0, 4.0, "");
 
         Set<ConstraintViolation<LazRequest>> violations = validator.validate(request);
 
         assertThat(violations.size(), equalTo(1));
         ConstraintViolation<LazRequest> violation = violations.iterator().next();
-        assertThat(violation.getMessage(), is("may not be null"));
-        assertThat(violation.getPropertyPath().toString(), is("level"));
+        assertThat(violation.getMessage(), is("may not be empty"));
+        assertThat(violation.getPropertyPath().toString(), is("email"));
     }
 }

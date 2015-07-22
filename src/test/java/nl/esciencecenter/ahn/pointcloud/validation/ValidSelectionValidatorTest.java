@@ -12,6 +12,7 @@ import java.util.Set;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class ValidSelectionValidatorTest {
     private static Validator validator;
@@ -32,23 +33,25 @@ public class ValidSelectionValidatorTest {
     }
 
     @Test
-    public void testIsValid_leftbiggerthanright_invalid() throws Exception {
+    public void testIsValid_leftbiggerthanright_swappedthem() throws Exception {
         Selection selection = new Selection(3.0, 2.0, 1.0, 4.0);
 
         Set<ConstraintViolation<Selection>> contraintValidations = validator.validate(selection);
 
-        assertThat(contraintValidations.iterator().next().getMessage(), is("Right must be bigger than left"));
-        assertThat(contraintValidations.size(), is(1));
+        assertThat(contraintValidations.isEmpty(), is(true));
+        Selection expected = new Selection(1.0, 2.0, 3.0, 4.0);
+        assertThat(selection, equalTo(expected));
     }
 
     @Test
-    public void testIsValid_topbiggerthanbottom_invalid() throws Exception {
+    public void testIsValid_topbiggerthanbottom_swappedthem() throws Exception {
         Selection selection = new Selection(1.0, 4.0, 3.0, 2.0);
 
         Set<ConstraintViolation<Selection>> contraintValidations = validator.validate(selection);
 
-        assertThat(contraintValidations.iterator().next().getMessage(), is("Top must be bigger than bottom"));
-        assertThat(contraintValidations.size(), is(1));
+        assertThat(contraintValidations.isEmpty(), is(true));
+        Selection expected = new Selection(1.0, 2.0, 3.0, 4.0);
+        assertThat(selection, equalTo(expected));
     }
 
     @Test

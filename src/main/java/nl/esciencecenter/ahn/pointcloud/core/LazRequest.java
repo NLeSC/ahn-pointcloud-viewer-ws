@@ -4,18 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.esciencecenter.ahn.pointcloud.ScriptConfiguration;
 import nl.esciencecenter.xenon.jobs.JobDescription;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 
 public class LazRequest extends Selection {
 
     @NotNull
-    @Range(min=0, max=24)
-    @JsonProperty
-    private Integer level;
-
-    @NotNull
+    @NotBlank
     @Email
     @JsonProperty
     private String email;

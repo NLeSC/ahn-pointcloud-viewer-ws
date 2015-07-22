@@ -21,15 +21,17 @@ public class ValidSelectionValidator implements ConstraintValidator<ValidSelecti
             // unable to validate ranges with nulls, let field validations trigger violations
             return true;
         }
-        // don't use default message, because violation can be vertical or horizontal
-        context.disableDefaultConstraintViolation();
+
+        // swap corners of selection if needed
         if (value.getLeft() > value.getRight()) {
-            context.buildConstraintViolationWithTemplate("Right must be bigger than left").addConstraintViolation();
-            isValid = false;
+            Double oldRight = value.getRight();
+            value.setRight(value.getLeft());
+            value.setLeft(oldRight);
         }
         if (value.getBottom() > value.getTop()) {
-            context.buildConstraintViolationWithTemplate("Top must be bigger than bottom").addConstraintViolation();
-            isValid = false;
+            Double oldTop = value.getTop();
+            value.setTop(value.getBottom());
+            value.setBottom(oldTop);
         }
 
         return isValid;

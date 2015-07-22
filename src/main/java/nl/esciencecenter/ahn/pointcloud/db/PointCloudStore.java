@@ -2,20 +2,17 @@ package nl.esciencecenter.ahn.pointcloud.db;
 
 import nl.esciencecenter.ahn.pointcloud.core.Selection;
 import nl.esciencecenter.ahn.pointcloud.core.Size;
-import nl.esciencecenter.ahn.pointcloud.exception.TooManyPoints;
 import org.skife.jdbi.v2.DBI;
 
 public class PointCloudStore {
     private final DBI dbi;
     private final long pointsLimit;
-    private final int octreeLevels;
     private final int srid;
 
     public PointCloudStore(DBI dbi, int srid, long pointsLimit) {
         this.dbi = dbi;
         this.srid = srid;
         this.pointsLimit = pointsLimit;
-        this.octreeLevels = dbi.onDemand(PotreeExtentsDOA.class).getMaxLevel();
     }
 
     /**
@@ -24,20 +21,23 @@ public class PointCloudStore {
      * @param selection Selection in a pointcloud
      * @return number of points
      */
-    public Size getApproximateNumberOfPoints(Selection selection) throws TooManyPoints {
-        RawExtentsDOA tiles = dbi.onDemand(RawExtentsDOA.class);
-        long points = tiles.getApproximateNumberOfPoints(
-                selection.getLeft(),
-                selection.getBottom(),
-                selection.getRight(),
-                selection.getTop(),
-                srid
-                );
+    public Size getApproximateNumberOfPoints(Selection selection) {
+        RawExtentsDOA rawExtents = dbi.onDemand(RawExtentsDOA.class);
+        PotreeExtentsDOA potreeExtents = dbi.onDemand(PotreeExtentsDOA.class);
+        PotreeDistancesDOA potreeDistances = dbi.onDemand(PotreeDistancesDOA.class);
 
-        // TODO calculate fraction between area of requested selection and area of selected tiles
-        // can be used to interpolate a better number of points
+        // TODO multiply count by ratio of area of counted tiles divided by area of selection
+        // for small areas the count of one raw tile will be the count
+        long rawPoints = rawExtents.getNumberOfPoints(selection, srid);
+        long returnedPoints = rawPoints;
+        int level = potreeDistances.getMaxLevel() + 1;
 
-        return new Size(points, pointsLimit, octreeLevels);
+        if (rawPoints > pointsLimit) {
+            level = potreeDistances.getLevel(rawPoints, pointsLimit);
+            returnedPoints = potreeExtents.getNumberOfPoints(level, selection, srid);
+        }
+
+        return new Size(rawPoints, returnedPoints, level);
     }
 
 }

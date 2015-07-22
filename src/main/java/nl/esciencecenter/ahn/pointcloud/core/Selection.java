@@ -50,6 +50,22 @@ public class Selection {
         return top;
     }
 
+    public void setLeft(Double left) {
+        this.left = left;
+    }
+
+    public void setBottom(Double bottom) {
+        this.bottom = bottom;
+    }
+
+    public void setRight(Double right) {
+        this.right = right;
+    }
+
+    public void setTop(Double top) {
+        this.top = top;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {return true;}

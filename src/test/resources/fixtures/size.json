@@ -1,5 +1,6 @@
 {
-  "points": 42132530,
+  "rawPoints": 10193813,
+  "returnedPoints": 9234324,
   "level": 8,
-  "coverage": 100.0
+  "coverage": 0.9058
 }
