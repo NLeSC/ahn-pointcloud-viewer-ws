@@ -5,24 +5,6 @@ import nl.esciencecenter.ahn.pointcloud.core.Size;
 import nl.esciencecenter.ahn.pointcloud.exception.TooManyPoints;
 import org.skife.jdbi.v2.DBI;
 
-/**
- *
- * Create test PostGIS database with:
- * CREATE ROLE ahn WITH LOGIN PASSWORD '<some password>';
- * CREATE DATABASE ahn WITH OWNER ahn;
- * \c ahn
- * CREATE EXTENSION postgis;
- *
- * CREATE TABLE extent_raw (filepath text, tile text, level integer, numberpoints integer, geom public.geometry(Geometry, 28992));
- * CREATE TABLE extent_potree (filepath text, tile text, level integer, numberpoints integer, geom public.geometry(Geometry, 28992));
- *
- * CREATE INDEX extent_raw_geom_idx ON extent_raw USING GIST (geom);
- * CREATE INDEX extent_potree_geom_idx ON extent_potree USING GIST (geom);
- *
- * INSERT INTO extent_raw (filepath, tile, level, numberpoints, geom) VALUES ('u01cz1.laz', 'u01cz1', 13, 42132530, st_geomFromText('POLYGON((124931.360 484567.840, 124931.360 485730.400, 126241.760 485730.400, 126241.760 484567.840, 124931.360 484567.840))', 28992));
- * INSERT INTO extent_potree (filepath, tile, level, numberpoints, geom) VALUES ('r634853426428.laz', 'r634853426428', 12, 42132530, st_geomFromText('POLYGON((124931.360 484567.840, 124931.360 485730.400, 126241.760 485730.400, 126241.760 484567.840, 124931.360 484567.840))', 28992));
- *
- */
 public class PointCloudStore {
     private final DBI dbi;
     private final long pointsLimit;

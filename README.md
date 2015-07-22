@@ -36,13 +36,11 @@ To open in an IDE like Eclipse or Intellij IDEA, create project files with `./gr
 docker run -e POSTGRES_USER=ahn -e POSTGRES_PASSWORD=mysecret -p 5432:5432 -d mdillon/postgis
 ````
 
-1.2 Fill it
+1.2 Fill it with test dataset
 
 ````
-psql -h localhost -U ahn ahn
+psql -h localhost -U ahn ahn < src/test/resources/test.sql
 ````
-
-See `src/main/java/nl/esciencecenter/ahn/pointcloud/db/PointCloudStore.java` for example dataset.
 
 2. Create a executable to run to create laz files. For example:
 
@@ -59,8 +57,8 @@ echo `date -Iseconds`: $@ >> ahn-slicer.log
 virtualenv env
 . env/bin/activate
 pip install httpie
-http -pHBhb http://localhost:8080/size left:=124932.60 bottom:=484568.840 right:=124942.60 top:=484588.840
-http -pHBhb http://localhost:8080/laz left:=124932.60 bottom:=484568.840 right:=124942.60 top:=484588.840 email=someone@example.com level:=13
+http -pHBhb http://localhost:8080/size left:=125932.60 bottom:=483568.840 right:=125942.60 top:=483588.840
+http -pHBhb http://localhost:8080/laz left:=125932.60 bottom:=483568.840 right:=125942.60 top:=483588.840 email=someone@example.com
 ````
 
 Build
