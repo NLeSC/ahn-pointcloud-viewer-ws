@@ -15,6 +15,7 @@ public class ViewerConfigurationTest {
     private ViewerConfiguration config;
     private XenonConfiguration xenon;
     private DataSourceFactory database;
+    private ScriptConfiguration scriptConfig;
 
     @Before
     public void setUp() {
@@ -22,7 +23,8 @@ public class ViewerConfigurationTest {
         SchedulerConfiguration scheduler = new SchedulerConfiguration("ssh", "someone@somewhere:2222", "multi", props);
         xenon = new XenonConfiguration(scheduler, props);
         database = new DataSourceFactory();
-        config = new ViewerConfiguration(5, 28992, database, xenon, "/bin/hostname");
+        scriptConfig = new ScriptConfiguration(28992, "/bin/echo", "ahn2", "/data/jobs", "http://localhost/jobs");
+        config = new ViewerConfiguration(5, database, xenon, scriptConfig);
     }
 
     @Test
@@ -46,7 +48,7 @@ public class ViewerConfigurationTest {
     }
 
     @Test
-    public void testGetExecutable() throws Exception {
-        assertThat(config.getExecutable(), is("/bin/hostname"));
+    public void testGetScript() throws Exception {
+        assertThat(config.getScript(), is(scriptConfig));
     }
 }

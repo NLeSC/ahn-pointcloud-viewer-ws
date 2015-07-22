@@ -4,24 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import nl.esciencecenter.ahn.pointcloud.job.XenonConfiguration;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class ViewerConfiguration extends Configuration {
-    private static final int EPSG_AMERSFOORT_RD_NEW = 28992;
 
     @Valid
     @Range(min=1)
     @JsonProperty
     private long pointsLimit;
-
-    @Valid
-    @NotNull
-    @JsonProperty
-    private int srid = EPSG_AMERSFOORT_RD_NEW;
 
     @Valid
     @NotNull
@@ -33,19 +26,19 @@ public class ViewerConfiguration extends Configuration {
     @JsonProperty
     private XenonConfiguration xenon;
 
-    @NotEmpty
+    @Valid
+    @NotNull
     @JsonProperty
-    private String executable;
+    private ScriptConfiguration script;
 
     private ViewerConfiguration() {
     }
 
-    public ViewerConfiguration(long maximumNumberOfPoints, int srid, DataSourceFactory database, XenonConfiguration xenon, String executable) {
-        this.pointsLimit = maximumNumberOfPoints;
-        this.srid = srid;
+    public ViewerConfiguration(long pointsLimit, DataSourceFactory database, XenonConfiguration xenon, ScriptConfiguration script) {
+        this.pointsLimit = pointsLimit;
         this.database = database;
         this.xenon = xenon;
-        this.executable = executable;
+        this.script = script;
     }
 
     public long getPointsLimit() {
@@ -53,7 +46,7 @@ public class ViewerConfiguration extends Configuration {
     }
 
     public int getSrid() {
-        return srid;
+        return script.getSrid();
     }
 
     public DataSourceFactory getDatabase() {
@@ -64,8 +57,7 @@ public class ViewerConfiguration extends Configuration {
         return xenon;
     }
 
-    public String getExecutable() {
-        return executable;
+    public ScriptConfiguration getScript() {
+        return script;
     }
-
 }

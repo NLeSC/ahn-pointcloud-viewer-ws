@@ -41,13 +41,13 @@ public class ViewerApplication extends Application<ViewerConfiguration> {
         return new PointCloudStore(jdbi, configuration.getSrid(), configuration.getPointsLimit());
     }
 
-    public void registerResources(ViewerConfiguration configuration, Environment environment, PointCloudStore store) throws XenonException {
+    private void registerResources(ViewerConfiguration configuration, Environment environment, PointCloudStore store) throws XenonException {
         final SizeResource sizeResource = new SizeResource(store);
         environment.jersey().register(sizeResource);
 
         final XenonSubmitter submitter = new XenonSubmitter(configuration.getXenon());
-        final String executable = configuration.getExecutable();
-        final LazResource lazResource = new LazResource(store, submitter, executable);
+        final ScriptConfiguration scriptConfig = configuration.getScript();
+        final LazResource lazResource = new LazResource(store, submitter, scriptConfig);
         environment.jersey().register(lazResource);
     }
 }

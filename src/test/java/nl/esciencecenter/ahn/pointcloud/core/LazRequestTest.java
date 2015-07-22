@@ -2,6 +2,8 @@ package nl.esciencecenter.ahn.pointcloud.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.jackson.Jackson;
+import nl.esciencecenter.ahn.pointcloud.ScriptConfiguration;
+import nl.esciencecenter.xenon.jobs.JobDescription;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
