@@ -19,7 +19,7 @@ mainClassName = 'nl.esciencecenter.ahn.pointcloud.ViewerApplication'
 
 ext {
     xenonVersion = '1.0.0'
-    dropwizardVersion = '0.8.1'
+    dropwizardVersion = '0.8.2'
     postgresqlVersion = '9.4-1201-jdbc41'
     jschVersion = '0.1.52'
 }

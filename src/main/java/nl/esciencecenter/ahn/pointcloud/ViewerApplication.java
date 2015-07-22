@@ -1,7 +1,10 @@
 package nl.esciencecenter.ahn.pointcloud;
 
 import io.dropwizard.Application;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.jdbi.DBIFactory;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import nl.esciencecenter.ahn.pointcloud.db.PointCloudStore;
 import nl.esciencecenter.ahn.pointcloud.job.XenonSubmitter;
@@ -13,6 +16,16 @@ import org.skife.jdbi.v2.DBI;
 public class ViewerApplication extends Application<ViewerConfiguration> {
     public static void main(String[] args) throws Exception {
         new ViewerApplication().run(args);
+    }
+
+    @Override
+    public void initialize(Bootstrap<ViewerConfiguration> bootstrap) {
+        // Enable variable substitution with environment variables
+        bootstrap.setConfigurationSourceProvider(
+            new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
+                new EnvironmentVariableSubstitutor()
+            )
+        );
     }
 
     @Override
