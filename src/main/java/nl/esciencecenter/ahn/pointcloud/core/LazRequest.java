@@ -60,7 +60,7 @@ public class LazRequest extends Selection {
             scriptConfig.getDataset(),
             "-f",
             String.valueOf(scriptConfig.getBasePath()),
-            "-u",
+            "-w",
             String.valueOf(scriptConfig.getBaseUrl())
         };
 
