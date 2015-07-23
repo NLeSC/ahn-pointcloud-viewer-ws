@@ -1,6 +1,8 @@
 package nl.esciencecenter.ahn.pointcloud.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Joiner;
+
 import nl.esciencecenter.ahn.pointcloud.ScriptConfiguration;
 import nl.esciencecenter.xenon.jobs.JobDescription;
 import org.hibernate.validator.constraints.Email;
@@ -50,7 +52,7 @@ public class LazRequest extends Selection {
             "-l",
             String.valueOf(level),
             "-b",
-            String.join(",", bbox),
+            Joiner.on(",").join(bbox),
             "-d",
             scriptConfig.getDataset(),
             "-f",

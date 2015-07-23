@@ -35,8 +35,9 @@ public class XenonSubmitter implements Managed {
     }
 
     /**
-     * @return Scheduler
-     * @throws XenonException
+     * @param schedulerConf configuration of scheduler
+     * @return Scheduler A Xenon scheduler to submit jobs to
+     * @throws XenonException when scheduler can be created
      */
     protected Scheduler newScheduler(SchedulerConfiguration schedulerConf) throws XenonException {
         // TODO prompt user for password/passphrases
@@ -49,7 +50,7 @@ public class XenonSubmitter implements Managed {
      *
      * @param description Job description
      * @return Job representing the running job.
-     * @throws XenonException
+     * @throws XenonException when job submission fails
      */
     public Job submit(JobDescription description) throws XenonException {
         description.setQueueName(queue);

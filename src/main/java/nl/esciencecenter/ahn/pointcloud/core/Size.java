@@ -29,36 +29,28 @@ public class Size {
     }
 
     /**
-     * Number of points of selection based on 100% of the available points.
-     *
-     * @return
+     * @return Number of points of selection based on 100% of the available points.
      */
     public long getRawPoints() {
         return rawPoints;
     }
 
     /**
-     * Number of points which can be returned when maximum of points is taken into account.
-     *
-     * @return
+     * @return Number of points which can be returned when maximum of points is taken into account.
      */
     public long getReturnedPoints() {
         return returnedPoints;
     }
 
     /**
-     * Level in octree at which the returned points will be taken from.
-     *
-     * @return
+     * @return Level in octree at which the returned points will be taken from.
      */
     public int getLevel() {
         return level;
     }
 
     /**
-     * Ration of returned points vs all points
-     *
-     * @return
+     * @return Ratio of returned points vs all points
      */
     @JsonProperty("coverage")
     public float getCoverage() {

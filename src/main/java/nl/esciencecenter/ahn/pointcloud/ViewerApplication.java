@@ -14,7 +14,7 @@ import nl.esciencecenter.xenon.XenonException;
 import org.skife.jdbi.v2.DBI;
 
 public class ViewerApplication extends Application<ViewerConfiguration> {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception  {
         new ViewerApplication().run(args);
     }
 
@@ -29,7 +29,7 @@ public class ViewerApplication extends Application<ViewerConfiguration> {
     }
 
     @Override
-    public void run(ViewerConfiguration configuration, Environment environment) throws Exception {
+    public void run(ViewerConfiguration configuration, Environment environment) throws XenonException {
         final PointCloudStore store = createStores(configuration, environment);
 
         registerResources(configuration, environment, store);
