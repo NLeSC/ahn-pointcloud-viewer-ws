@@ -11,7 +11,7 @@ public interface PotreeExtentsDOA {
             + "  FLOOR(SUM(LEAST(numberpoints, (numberpoints * (ST_Area(qgeom) /ST_Area(geom)))))) AS numpoints_raw "
             + "FROM "
             + "  extent_potree, "
-            + "  (SELECT ST_SetSRID(ST_MakeBox2D(ST_Point(:left, :bottom),ST_Point(:right, :top)), :srid) AS qgeom) AS B "
+            + "  (SELECT ST_SetSRID(ST_MakeBox2D(ST_Point(:b.left, :b.bottom),ST_Point(:b.right, :b.top)), :srid) AS qgeom) AS B "
             + "WHERE level = :level "
             + "AND geom && qgeom")
     long getNumberOfPoints(@Bind("level") int level,
