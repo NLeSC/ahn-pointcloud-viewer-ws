@@ -7,14 +7,13 @@ import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 
 public interface PotreeExtentsDOA {
-
-    @SqlQuery("SELECT sum(numberpoints)" +
-            "FROM extent_potree " +
-            "WHERE level = :level AND " +
-            "   geom && ST_SetSRID(ST_MakeBox2D(" +
-            "      ST_Point(:b.left, :b.bottom)," +
-            "      ST_Point(:b.right, :b.top)" +
-            "   ), :srid)")
+    @SqlQuery("SELECT "
+            + "  SUM(LEAST(numberpoints, (numberpoints * (ST_Area(qgeom) /ST_Area(geom)))::bigint)) AS numpoints_raw "
+            + "FROM "
+            + "  extent_potree, "
+            + "  (SELECT ST_SetSRID(ST_MakeBox2D(ST_Point(:left, :bottom),ST_Point(:right, :top)), :srid) AS qgeom) AS B "
+            + "WHERE level = :level "
+            + "AND geom && qgeom")
     long getNumberOfPoints(@Bind("level") int level,
                            @BindBean("b") Selection bbox,
                            @Bind("srid") int srid);

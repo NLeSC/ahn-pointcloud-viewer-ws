@@ -26,8 +26,6 @@ public class PointCloudStore {
         PotreeExtentsDOA potreeExtents = dbi.onDemand(PotreeExtentsDOA.class);
         PotreeDistancesDOA potreeDistances = dbi.onDemand(PotreeDistancesDOA.class);
 
-        // TODO multiply count by ratio of area of counted tiles divided by area of selection
-        // for small areas the count of one raw tile will be the count
         long rawPoints = rawExtents.getNumberOfPoints(selection, srid);
         long returnedPoints = rawPoints;
         int level = potreeDistances.getMaxLevel() + 1;
