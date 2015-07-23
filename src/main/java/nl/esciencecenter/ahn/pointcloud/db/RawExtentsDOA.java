@@ -11,7 +11,8 @@ public interface RawExtentsDOA {
             + "FROM "
             + "  extent_raw, "
             + "  (SELECT ST_SetSRID(ST_MakeBox2D(ST_Point(:b.left, :b.bottom),ST_Point(:b.right, :b.top)), :srid) AS qgeom) AS B "
-            + "WHERE geom && qgeom")
+            + "WHERE geom && qgeom "
+            + "AND ST_Area(geom) != 0")
     long getNumberOfPoints(@BindBean("b") Selection bbox,
                            @Bind("srid") int srid);
 }

@@ -13,7 +13,8 @@ public interface PotreeExtentsDOA {
             + "  extent_potree, "
             + "  (SELECT ST_SetSRID(ST_MakeBox2D(ST_Point(:b.left, :b.bottom),ST_Point(:b.right, :b.top)), :srid) AS qgeom) AS B "
             + "WHERE level = :level "
-            + "AND geom && qgeom")
+            + "AND geom && qgeom "
+            + "AND ST_Area(geom) != 0")
     long getNumberOfPoints(@Bind("level") int level,
                            @BindBean("b") Selection bbox,
                            @Bind("srid") int srid);
