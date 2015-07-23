@@ -48,6 +48,8 @@ public class LazRequestTest  {
             "-s", "28992", "-e", "someone@example.com", "-l", "8", "-b", "1.0,2.0,3.0,4.0", "-d", "ahn2", "-f", "/data/jobs", "-u", "http://localhost/jobs"
         };
         expected.setArguments(expectedArguments);
+        expected.setStderr("/data/jobs/1.0_2.0_3.0_4.0.err");
+        expected.setStdout("/data/jobs/1.0_2.0_3.0_4.0.out");
         assertThat(result, equalTo(expected));
     }
 

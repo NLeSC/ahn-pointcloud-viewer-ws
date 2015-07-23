@@ -54,6 +54,8 @@ public class XenonSubmitter implements Managed {
      */
     public Job submit(JobDescription description) throws XenonException {
         description.setQueueName(queue);
+        LOGGER.info("Submitting");
+        LOGGER.info(description.toString());
         return xenon.jobs().submitJob(scheduler, description);
     }
 

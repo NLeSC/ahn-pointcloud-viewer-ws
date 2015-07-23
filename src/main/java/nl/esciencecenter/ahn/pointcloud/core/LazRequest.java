@@ -8,6 +8,9 @@ import nl.esciencecenter.xenon.jobs.JobDescription;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.validation.constraints.NotNull;
 
 public class LazRequest extends Selection {
@@ -64,6 +67,10 @@ public class LazRequest extends Selection {
         JobDescription description = new JobDescription();
         description.setArguments(arguments);
         description.setExecutable(scriptConfig.getExecutable());
+        String stderr = scriptConfig.getBasePath() + "/" + Joiner.on("_").join(bbox) + ".err";
+        description.setStderr(stderr);
+        String stdout = scriptConfig.getBasePath() + "/" + Joiner.on("_").join(bbox) + ".out";
+        description.setStdout(stdout);
         return description;
     }
 }
