@@ -36,9 +36,9 @@ public class LazRequest extends Selection {
     public JobDescription toJobDescription(int level, ScriptConfiguration scriptConfig) {
 
         // See https://github.com/NLeSC/Massive-PotreeConverter/blob/master/python/create_user_file.py
-        // create_user_file.py -s
-        // 28992 -e o.rubi@esciencecenter.nl -l 5 -b
-        // 116549.99,399108.01,169138.67,444358.73 -d ahn2 -f /data/ahn2_pc_viewer/user_data -w http://131.180.126.49/user_data
+        // create_user_file.py -s \
+        // 28992 -e o.rubi@esciencecenter.nl -l 5 -b \
+        // "116549.99 399108.01 169138.67 444358.73" -d ahn2 -f /data/ahn2_pc_viewer/user_data -w http://131.180.126.49/user_data
 
         String[] bbox = {
             String.valueOf(getLeft()),
@@ -55,7 +55,7 @@ public class LazRequest extends Selection {
             "-l",
             String.valueOf(level),
             "-b",
-            "\"" + Joiner.on(",").join(bbox) + "\"",
+            "\"" + Joiner.on(" ").join(bbox) + "\"",
             "-d",
             scriptConfig.getDataset(),
             "-f",
