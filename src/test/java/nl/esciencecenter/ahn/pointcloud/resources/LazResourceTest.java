@@ -49,7 +49,7 @@ public class LazResourceTest {
         JobDescription submittedDescription = argument.getValue();
         assertThat(submittedDescription.getExecutable(), is("/bin/echo"));
         String[] expectedArguments = {
-            "-s", "28992", "-e", "someone@example.com", "-l", "8", "-b", "124931.36,484567.84,126241.76,485730.4", "-d", "ahn2", "-f", "/data/jobs", "-w", "http://localhost/jobs"
+            "-s", "28992", "-e", "someone@example.com", "-l", "8", "-b", "\"124931.36,484567.84,126241.76,485730.4\"", "-d", "ahn2", "-f", "/data/jobs", "-w", "http://localhost/jobs"
         };
         assertThat(submittedDescription.getArguments(), equalTo(Arrays.asList(expectedArguments)));
     }

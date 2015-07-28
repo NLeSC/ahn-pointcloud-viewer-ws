@@ -55,7 +55,7 @@ public class LazRequest extends Selection {
             "-l",
             String.valueOf(level),
             "-b",
-            Joiner.on(",").join(bbox),
+            "\"" + Joiner.on(",").join(bbox) + "\"",
             "-d",
             scriptConfig.getDataset(),
             "-f",

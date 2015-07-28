@@ -7,7 +7,7 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 
 public interface RawExtentsDOA {
     @SqlQuery("SELECT "
-            + "  FLOOR(SUM(LEAST(numberpoints, (numberpoints * (ST_Area(qgeom) /ST_Area(geom)))))) AS numpoints_raw "
+            + "  FLOOR(SUM(numberpoints * (ST_Area(ST_Intersection(geom, qgeom)) /ST_Area(geom)))) AS numpoints "
             + "FROM "
             + "  extent_raw, "
             + "  (SELECT ST_SetSRID(ST_MakeBox2D(ST_Point(:b.left, :b.bottom),ST_Point(:b.right, :b.top)), :srid) AS qgeom) AS B "
