@@ -10,7 +10,6 @@ and starts a script to create a laz file of the selection.
 Development
 -----------
 
-
 First create config file `config.yml`, use `config.yml-dist` as an example.
 Se `src/main/java/nl/esciencecenter/ahn/pointcloud/db/PointCloudStore.java` for instructions to create an example PostGIS database.
 
@@ -65,8 +64,7 @@ Build
 -----
 
 ````
-git clone git@github.com:NLeSC/ahn-pointcloud-viewer.git
-cd ahn-pointcloud-viewer/server
+git clone git@github.com:NLeSC/ahn-pointcloud-viewer-ws.git
 ./gradlew build
 ````
 
