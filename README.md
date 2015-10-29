@@ -108,4 +108,4 @@ To fill in a PostgreSQL database with the required information use the scripts
 [Massive-PotreeConverter repository] (https://github.com/NLeSC/Massive-PotreeConverter).
 
 The file `create_user_file.py` in `main/python` is used to create a user file
-from a selected region and it uses the described PostgreSQL database.
+from a selected region and it uses the described PostgreSQL database. The scripts uses LAStools.
