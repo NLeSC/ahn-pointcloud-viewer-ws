@@ -94,3 +94,18 @@ sudo npm install -g aglio
 aglio -i apiary.apib -s
 ````
 
+Database and create_user_file
+-----------------------------
+
+This web service relies on a Database which contains 
+a table with the extents of the files in the AHN2,
+a table with the extents of the files in the octree structure and
+a third table that contans, for each level of the octree, the ratio of 
+points in the level diviede by the total number of points .
+
+To fill in a PostgreSQL database with the required information use the scripts
+`fill_db_raw.py` and `fill_db_potree.py` from the 
+[Massive-PotreeConverter repository] (https://github.com/NLeSC/Massive-PotreeConverter).
+
+The file `create_user_file.py` in `main/python` is used to create a user file
+from a selected region and it uses the described PostgreSQL database.
