@@ -20,7 +20,7 @@ script:
   srid: 28992
   # Executable to run with selection as arguments,
   # executable must be in path of Xenon scheduler or use an absolute path
-  executable: create_user_file.py
+  executable: main/python/create_user_file.py
   # Dataset name to query
   dataset: ahn2
   # Base path for the output file (filesystem access)
