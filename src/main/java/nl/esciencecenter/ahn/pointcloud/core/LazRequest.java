@@ -1,17 +1,15 @@
 package nl.esciencecenter.ahn.pointcloud.core;
 
+import javax.validation.constraints.NotNull;
+
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
-
 import nl.esciencecenter.ahn.pointcloud.ScriptConfiguration;
 import nl.esciencecenter.xenon.jobs.JobDescription;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import javax.validation.constraints.NotNull;
 
 public class LazRequest extends Selection {
 
@@ -72,5 +70,19 @@ public class LazRequest extends Selection {
         String stdout = scriptConfig.getBasePath() + "/" + Joiner.on("_").join(bbox) + ".out";
         description.setStdout(stdout);
         return description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        LazRequest that = (LazRequest) o;
+        return Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), email);
     }
 }

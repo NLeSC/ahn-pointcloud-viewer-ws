@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XenonSubmitter implements Managed {
-    protected static final Logger LOGGER = LoggerFactory.getLogger(XenonSubmitter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(XenonSubmitter.class);
 
     /**
      * Queue of scheduler to which job description will be submitted
@@ -28,7 +28,7 @@ public class XenonSubmitter implements Managed {
         queue = configuration.getScheduler().getQueue();
     }
 
-    public XenonSubmitter(String queue, Xenon xenon, Scheduler scheduler) {
+    XenonSubmitter(String queue, Xenon xenon, Scheduler scheduler) {
         this.queue = queue;
         this.xenon = xenon;
         this.scheduler = scheduler;
@@ -39,7 +39,7 @@ public class XenonSubmitter implements Managed {
      * @return Scheduler A Xenon scheduler to submit jobs to
      * @throws XenonException when scheduler can be created
      */
-    protected Scheduler newScheduler(SchedulerConfiguration schedulerConf) throws XenonException {
+    private Scheduler newScheduler(SchedulerConfiguration schedulerConf) throws XenonException {
         // TODO prompt user for password/passphrases
         Credential credential = null;
         return xenon.jobs().newScheduler(schedulerConf.getScheme(), schedulerConf.getLocation(), credential, schedulerConf.getProperties());
@@ -54,14 +54,13 @@ public class XenonSubmitter implements Managed {
      */
     public Job submit(JobDescription description) throws XenonException {
         description.setQueueName(queue);
-        LOGGER.info("Submitting");
-        LOGGER.info(description.toString());
+        LOGGER.info("Submitting: %s", description);
         return xenon.jobs().submitJob(scheduler, description);
     }
 
     @Override
     public void start() throws Exception {
-
+        // Nothing to do
     }
 
     @Override

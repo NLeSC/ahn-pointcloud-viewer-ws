@@ -23,7 +23,7 @@ public class ViewerApplication extends Application<ViewerConfiguration> {
         // Enable variable substitution with environment variables
         bootstrap.setConfigurationSourceProvider(
             new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
-                new EnvironmentVariableSubstitutor()
+                new EnvironmentVariableSubstitutor(false)
             )
         );
     }

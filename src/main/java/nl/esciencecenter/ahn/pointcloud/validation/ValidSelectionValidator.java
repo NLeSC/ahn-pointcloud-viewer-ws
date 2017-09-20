@@ -10,13 +10,12 @@ public class ValidSelectionValidator implements ConstraintValidator<ValidSelecti
 
     @Override
     public void initialize(ValidSelection constraintAnnotation) {
-
+        // Do nothing, because validator does not need initialization
     }
 
     @Override
     public boolean isValid(Selection value, ConstraintValidatorContext context) {
         // OK if left < right + bottom < top
-        boolean isValid = true;
         if (value.getBottom() == null || value.getLeft() == null || value.getRight() == null || value.getTop() == null) {
             // unable to validate ranges with nulls, let field validations trigger violations
             return true;
@@ -34,6 +33,6 @@ public class ValidSelectionValidator implements ConstraintValidator<ValidSelecti
             value.setBottom(oldTop);
         }
 
-        return isValid;
+        return true;
     }
 }

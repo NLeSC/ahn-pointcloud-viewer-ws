@@ -2,10 +2,16 @@ AHN pointcloud viewer web service
 =================================
 
 [![Build Status](https://travis-ci.org/NLeSC/ahn-pointcloud-viewer-ws.svg)](https://travis-ci.org/NLeSC/ahn-pointcloud-viewer-ws)
-[![Coverage Status](https://coveralls.io/repos/NLeSC/ahn-pointcloud-viewer-ws/badge.svg?branch=master)](https://coveralls.io/r/NLeSC/ahn-pointcloud-viewer-ws?branch=master)
+[![SonarCloud Gate](https://sonarcloud.io/api/badges/gate?key=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws)](https://sonarcloud.io/dashboard?id=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws)
+[![SonarCloud Coverage](https://sonarcloud.io/api/badges/measure?key=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws&metric=coverage)](https://sonarcloud.io/component_measures/domain/Coverage?id=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws)
 
-Uses a PostGIS database to approximate number of points in selected area 
-and starts a script to create a laz file of the selection.
+Backend for the [ahn-pointcloud-viewer](https://github.com/NLeSC/ahn-pointcloud-viewer) web application.
+
+Has the following api endpoints:
+1. Compute the number of points in a selected area
+2. Create a laz file of the selection and send a mail to end-user with download location of the generated laz file
+
+It uses a PostGIS database to approximate number of points in selected area.
 
 Development
 -----------
@@ -38,7 +44,7 @@ docker run -e POSTGRES_USER=ahn -e POSTGRES_PASSWORD=mysecret -p 5432:5432 -d md
 1.2 Fill it with test dataset
 
 ````
-psql -h localhost -U ahn ahn < src/test/resources/test.sql
+psql -h localhost -p 5432 -U ahn ahn < src/test/resources/test.sql
 ````
 
 2. Create a executable to run to create laz files. For example:
@@ -78,7 +84,7 @@ Deployment
 3. Run it
 
 ````
-bin/server server config.yml
+bin/ahn-pointcloud-viewer-ws server config.yml
 ````
 
 A web service will be started on http://localhost:8080
@@ -105,7 +111,7 @@ points in the level diviede by the total number of points .
 
 To fill in a PostgreSQL database with the required information use the scripts
 `fill_db_raw.py` and `fill_db_potree.py` from the 
-[Massive-PotreeConverter repository] (https://github.com/NLeSC/Massive-PotreeConverter).
+[Massive-PotreeConverter repository](https://github.com/NLeSC/Massive-PotreeConverter).
 
 The file `create_user_file.py` in `main/python` is used to create a user file
 from a selected region and it uses the described PostgreSQL database. The scripts uses LAStools.

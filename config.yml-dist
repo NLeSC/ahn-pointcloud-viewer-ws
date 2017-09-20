@@ -4,8 +4,9 @@ pointsLimit: 1000000
 database:
   driverClass: org.postgresql.Driver
   user: ahn
-  # Use environment variable to set password with ${AHN_PASSWORD}
   password: <some password>
+  # Or use AHN_PASSWORD environment variable to set password by uncommenting line below
+  #password: ${AHN_PASSWORD}
   url: jdbc:postgresql://localhost/ahn
 # To run the executable a Xenon scheduler is used
 xenon:
@@ -20,10 +21,11 @@ script:
   srid: 28992
   # Executable to run with selection as arguments,
   # executable must be in path of Xenon scheduler or use an absolute path
-  executable: main/python/create_user_file.py
+  executable: src/main/python/create_user_file.py
   # Dataset name to query
   dataset: ahn2
   # Base path for the output file (filesystem access)
   basePath: /data/jobs
   # Base URL for the output file (web access)
   baseUrl: http://ahn2.pointclouds.nl/jobs
+

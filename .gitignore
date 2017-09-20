@@ -4,5 +4,6 @@ config.yml
 *.iml
 *.ipr
 *.iws
+.idea
 
 /bin/
