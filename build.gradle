@@ -57,5 +57,25 @@ run {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.5'
+    gradleVersion = '4.2'
+}
+
+// include Python scripts in distribution
+distributions {
+    main {
+        contents {
+            from(file('src/main/python')) {
+                into "python"
+            }
+        }
+    }
+}
+
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.organization', 'nlesc'
+        property 'sonar.language', 'java'
+        property 'sonar.links.homepage', 'https://github.com/NLeSC/ahn-pointcloud-viewer-ws'
+    }
 }
