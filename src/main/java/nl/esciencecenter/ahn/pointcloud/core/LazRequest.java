@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
+import io.swagger.annotations.ApiModelProperty;
 import nl.esciencecenter.ahn.pointcloud.ScriptConfiguration;
 import nl.esciencecenter.xenon.jobs.JobDescription;
 import org.hibernate.validator.constraints.Email;
@@ -17,6 +18,7 @@ public class LazRequest extends Selection {
     @NotBlank
     @Email
     @JsonProperty
+    @ApiModelProperty(value="E-mail to send laz file url to", example = "someone@example.com")
     private String email;
 
     private LazRequest() {

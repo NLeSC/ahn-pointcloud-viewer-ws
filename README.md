@@ -83,16 +83,14 @@ http -pHBhb http://localhost:8080/size left:=125932.60 bottom:=483568.840 right:
 http -pHBhb http://localhost:8080/laz left:=125932.60 bottom:=483568.840 right:=125942.60 top:=483588.840 email=someone@example.com
 ````
 
-Generate web api documentation
-------------------------------
+Api spec and documentation
+--------------------------
 
-API documentation is written in https://apiblueprint.org/ format.
+The web service uses [Swagger specification](https://swagger.io/) to describe it's endpoints. 
 
-API documentation can be preview with:
-````
-sudo npm install -g aglio
-aglio -i apiary.apib -s
-````
+The running web service will have the Swagger UI at `/swagger` and the Swagger spec at `/swagger.json` or `/swagger.yaml`.
+
+The Swagger specification is available as `./swagger.yaml` in this repo. It can be viewed in the [swagger UI](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/NLeSC/ahn-pointcloud-viewer/master/swagger.yaml).
 
 Database and create_user_file
 -----------------------------

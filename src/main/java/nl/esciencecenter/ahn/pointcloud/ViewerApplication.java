@@ -6,6 +6,8 @@ import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import nl.esciencecenter.ahn.pointcloud.db.PointCloudStore;
 import nl.esciencecenter.ahn.pointcloud.job.XenonSubmitter;
 import nl.esciencecenter.ahn.pointcloud.resources.LazResource;
@@ -26,6 +28,12 @@ public class ViewerApplication extends Application<ViewerConfiguration> {
                 new EnvironmentVariableSubstitutor(false)
             )
         );
+        bootstrap.addBundle(new SwaggerBundle<ViewerConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(ViewerConfiguration configuration) {
+                return configuration.getSwagger();
+            }
+        });
     }
 
     @Override

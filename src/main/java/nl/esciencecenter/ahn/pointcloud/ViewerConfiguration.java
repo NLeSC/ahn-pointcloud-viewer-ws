@@ -3,6 +3,7 @@ package nl.esciencecenter.ahn.pointcloud;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import nl.esciencecenter.ahn.pointcloud.job.XenonConfiguration;
 import org.hibernate.validator.constraints.Range;
 
@@ -31,7 +32,10 @@ public class ViewerConfiguration extends Configuration {
     @JsonProperty
     private ScriptConfiguration script;
 
+    private SwaggerBundleConfiguration swagger;
+
     private ViewerConfiguration() {
+        buildSwaggerConf();
     }
 
     public ViewerConfiguration(long pointsLimit, DataSourceFactory database, XenonConfiguration xenon, ScriptConfiguration script) {
@@ -39,6 +43,13 @@ public class ViewerConfiguration extends Configuration {
         this.database = database;
         this.xenon = xenon;
         this.script = script;
+        buildSwaggerConf();
+    }
+
+    private void buildSwaggerConf() {
+        swagger = new SwaggerBundleConfiguration();
+        swagger.setResourcePackage("nl.esciencecenter.ahn.pointcloud.resources");
+        swagger.setTitle("AHN point cloud viewer web service");
     }
 
     public long getPointsLimit() {
@@ -59,5 +70,9 @@ public class ViewerConfiguration extends Configuration {
 
     public ScriptConfiguration getScript() {
         return script;
+    }
+
+    public SwaggerBundleConfiguration getSwagger() {
+        return swagger;
     }
 }

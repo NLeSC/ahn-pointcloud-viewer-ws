@@ -1,6 +1,7 @@
 package nl.esciencecenter.ahn.pointcloud.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
@@ -9,14 +10,17 @@ import java.util.Objects;
 public class Size {
     @NotNull
     @Range(min=0)
+    @ApiModelProperty(value="Approximate number of points in selection", example = "10193813")
     private long rawPoints = 0;
 
     @NotNull
     @Range(min=0)
+    @ApiModelProperty(value="Approximate number of points in selection which will be returned", example = "9234324")
     private long returnedPoints = 0;
 
     @NotNull
     @Range(min=0, max=24)
+    @ApiModelProperty(value=" Level in octree pyramid to fetch points from. Lower number means less points", example="8")
     private int level;
 
     private Size() {
@@ -53,6 +57,7 @@ public class Size {
      * @return Ratio of returned points vs all points
      */
     @JsonProperty("coverage")
+    @ApiModelProperty(value="Ratio of points returned with given level", example="0.9058")
     public float getCoverage() {
         if (rawPoints == 0) {
             return 1;

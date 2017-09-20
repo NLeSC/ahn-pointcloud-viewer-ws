@@ -1,6 +1,7 @@
 package nl.esciencecenter.ahn.pointcloud.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import nl.esciencecenter.ahn.pointcloud.validation.ValidSelection;
 
 import javax.validation.constraints.NotNull;
@@ -10,18 +11,22 @@ import java.util.Objects;
 public class Selection {
     @NotNull
     @JsonProperty
+    @ApiModelProperty(value="Most left or minimum x coordinate", example = "124931.360")
     private Double left;
 
     @NotNull
     @JsonProperty
+    @ApiModelProperty(value="Most bottom or minimum y coordinate", example = "484567.840")
     private Double bottom;
 
     @NotNull
     @JsonProperty
+    @ApiModelProperty(value="Most right or maximum x coordinate", example = "126241.760")
     private Double right;
 
     @NotNull
     @JsonProperty
+    @ApiModelProperty(value="Most top or maximum x coordinate", example = "485730.400")
     private Double top;
 
     public Selection(Double left, Double bottom, Double right, Double top) {

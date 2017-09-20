@@ -1,0 +1,113 @@
+---
+swagger: "2.0"
+info:
+  title: "AHN point cloud viewer web service"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /laz:
+    post:
+      summary: "Submit selection to generate a laz file and send mail"
+      description: ""
+      operationId: "submitSelection"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/LazRequest"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Size"
+        405:
+          description: "Invalid input"
+  /size:
+    post:
+      summary: "Retrieve approximate number of points in selection"
+      description: ""
+      operationId: "getSizeOfSelection"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Selection"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Size"
+        405:
+          description: "Invalid input"
+definitions:
+  Size:
+    type: "object"
+    required:
+    - "level"
+    - "rawPoints"
+    - "returnedPoints"
+    properties:
+      rawPoints:
+        type: "integer"
+        format: "int64"
+      returnedPoints:
+        type: "integer"
+        format: "int64"
+      level:
+        type: "integer"
+        format: "int32"
+      coverage:
+        type: "number"
+        format: "float"
+  LazRequest:
+    type: "object"
+    required:
+    - "bottom"
+    - "email"
+    - "left"
+    - "right"
+    - "top"
+    properties:
+      left:
+        type: "number"
+        format: "double"
+      bottom:
+        type: "number"
+        format: "double"
+      right:
+        type: "number"
+        format: "double"
+      top:
+        type: "number"
+        format: "double"
+      email:
+        type: "string"
+        readOnly: true
+  Selection:
+    type: "object"
+    required:
+    - "bottom"
+    - "left"
+    - "right"
+    - "top"
+    properties:
+      left:
+        type: "number"
+        format: "double"
+      bottom:
+        type: "number"
+        format: "double"
+      right:
+        type: "number"
+        format: "double"
+      top:
+        type: "number"
+        format: "double"
+

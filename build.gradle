@@ -42,6 +42,7 @@ dependencies {
 
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-jdbi', version: dropwizardVersion
+    compile group: 'com.smoketurner', name: 'dropwizard-swagger', version: '1.1.1-1'
     compile group: 'org.postgresql', name: 'postgresql', version: postgresqlVersion
     compile group: 'nl.esciencecenter', name: 'xenon', version: xenonVersion
 
