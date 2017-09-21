@@ -90,7 +90,7 @@ The web service uses [Swagger specification](https://swagger.io/) to describe it
 
 The running web service will have the Swagger UI at `/swagger` and the Swagger spec at `/swagger.json` or `/swagger.yaml`.
 
-The Swagger specification is available as `./swagger.yaml` in this repo. It can be viewed in the [swagger UI](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/NLeSC/ahn-pointcloud-viewer/master/swagger.yaml).
+The Swagger specification is available as `./swagger.yaml` in this repo. It can be viewed in the [swagger UI](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/NLeSC/ahn-pointcloud-viewer-ws/swagger/swagger.yaml).
 
 Database and create_user_file
 -----------------------------
