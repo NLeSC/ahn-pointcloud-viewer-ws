@@ -4,6 +4,7 @@ AHN pointcloud viewer web service
 [![Build Status](https://travis-ci.org/NLeSC/ahn-pointcloud-viewer-ws.svg)](https://travis-ci.org/NLeSC/ahn-pointcloud-viewer-ws)
 [![SonarCloud Gate](https://sonarcloud.io/api/badges/gate?key=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws)](https://sonarcloud.io/dashboard?id=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws)
 [![SonarCloud Coverage](https://sonarcloud.io/api/badges/measure?key=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws&metric=coverage)](https://sonarcloud.io/component_measures/domain/Coverage?id=nl.esciencecenter.ahn:ahn-pointcloud-viewer-ws)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.909308.svg)](https://doi.org/10.5281/zenodo.909308)
 
 Web service for the [ahn-pointcloud-viewer](https://github.com/NLeSC/ahn-pointcloud-viewer) web application. Ahn-point-cloud-viewer is a point cloud visualization for country sized point clouds.
 
